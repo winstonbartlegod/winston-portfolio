@@ -223,18 +223,18 @@ export function Hero() {
               className="-top-4 -left-8 whitespace-nowrap"
             />
             <FloatingBadge
-              text="MSc FinTech — HKUST"
+              text="BSc Econometrics — UvA" 
               icon="🎓"
               className="-bottom-2 -right-6 whitespace-nowrap"
             />
             <FloatingBadge
-              text="AI · ML · Finance"
-              icon="🤖"
-              className="top-1/2 -right-16 whitespace-nowrap"
+              text="MSc FinTech — HKUST"
+              icon="🎓"
+              className="top-1/2 -right-24 whitespace-nowrap"
             />
             <FloatingBadge
-              text="BSc Econometrics — UvA"
-              icon="📊"
+              text="AI · ML · Finance"
+              icon="🤖"
               className="top-1/3 -left-16 whitespace-nowrap"
             />
 
