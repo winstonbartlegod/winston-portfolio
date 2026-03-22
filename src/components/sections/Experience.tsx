@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { ExternalLink, MapPin, Calendar } from 'lucide-react';
 import { profile } from '@/data/profile';
@@ -56,10 +57,20 @@ export function Experience() {
                 {/* Timeline dot */}
                 <div className="flex-shrink-0 hidden md:flex flex-col items-center">
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg border border-white/10 z-10 relative transition-all duration-300 group-hover:scale-110"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg border border-white/10 z-10 relative transition-all duration-300 group-hover:scale-110 overflow-hidden"
                     style={{ background: `${job.color}20`, color: job.color, borderColor: `${job.color}30` }}
                   >
-                    {job.logoFallback}
+                    {job.logo ? (
+                      <Image
+                        src={job.logo}
+                        alt={job.company}
+                        width={28}
+                        height={28}
+                        className="object-contain"
+                      />
+                    ) : (
+                      job.logoFallback
+                    )}
                   </div>
                 </div>
 
@@ -68,7 +79,21 @@ export function Experience() {
                   {/* Header */}
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-2.5 flex-wrap mb-1">
+                        {job.logo && (
+                          <div
+                            className="w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
+                            style={{ background: `${job.color}18`, border: `1px solid ${job.color}25` }}
+                          >
+                            <Image
+                              src={job.logo}
+                              alt={job.company}
+                              width={20}
+                              height={20}
+                              className="object-contain"
+                            />
+                          </div>
+                        )}
                         <h3 className="text-base font-semibold text-white">{job.title}</h3>
                         <span
                           className="text-[10px] font-medium px-2 py-0.5 rounded-full"
