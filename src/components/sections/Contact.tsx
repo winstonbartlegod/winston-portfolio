@@ -49,7 +49,7 @@ export function Contact() {
           viewport={{ once: true }}
           className="section-label"
         >
-          06. Contact
+          07. Contact
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}

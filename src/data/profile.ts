@@ -138,6 +138,12 @@ export const profile = {
       logo: '/images/logos/hkust.svg',
       logoFallback: 'HK',
       color: '#003366',
+      documents: [
+        {
+          title: 'Investment Opportunities in the Gaming and eSports Industry',
+          url: '/Investment_Opportunities_in_the_Gaming_and_eSports_Industry.pdf',
+        },
+      ],
       description:
         'Specialised in advanced machine learning and application to various domains such as financial forecasting. Covering all topics such as deep learning, graph neural networks, algorithmic trading, blockchain.',
       highlights: ['Graph Neural Networks', 'Algorithmic Trading', 'Blockchain', 'Financial Modelling', 'AI'],
@@ -154,7 +160,20 @@ export const profile = {
       logo: '/images/logos/uva.svg',
       logoFallback: 'UA',
       color: '#BC0031',
-      thesisUrl: '/Bachelor_Thesis.pdf',
+      documents: [
+        {
+          title: 'Bachelor Thesis',
+          url: '/Bachelor_Thesis.pdf',
+        },
+        {
+          title: 'Assignment: High Bias in Labour Market',
+          url: '/Assignment High Bias in Labour Market.pdf',
+        },
+        {
+          title: 'Empirical Project',
+          url: '/Empirical Project.pdf',
+        },
+      ],
       description:
         'Rigorous quantitative training combining econometrics, causal inference, time-series analysis, and modern data science methods',
       highlights: ['Econometrics','Time-Series Analysis', 'Python', 'R', 'Mathematical Finance', 'Statistical Learning', 'Life Insurance'],
@@ -171,6 +190,12 @@ export const profile = {
       logo: '/images/logos/rug.svg',
       logoFallback: 'RG',
       color: '#E41E20',
+      documents: [
+        {
+          title: 'Colour in Visual Cognition',
+          url: '/Colour in Visual Cognition.pdf',
+        },
+      ],
       description:
         'Foundational AI curriculum covering symbolic AI, Logic, Algorithms and Data Structures, Programing in C',
       highlights: ['C', 'Algorithm and Data Structures', 'Research', 'Logics'],

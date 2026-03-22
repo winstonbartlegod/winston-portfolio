@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin, FileText, ExternalLink } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { profile } from '@/data/profile';
 
 export function Education() {
@@ -83,20 +83,6 @@ export function Education() {
                   <span key={h} className="tag-pill-teal">{h}</span>
                 ))}
               </div>
-
-              {/* Thesis download link */}
-              {(edu as unknown as { thesisUrl?: string }).thesisUrl && (
-                <a
-                  href={(edu as unknown as { thesisUrl: string }).thesisUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors font-medium mt-1"
-                >
-                  <FileText size={12} />
-                  Download Bachelor Thesis
-                  <ExternalLink size={10} className="opacity-60" />
-                </a>
-              )}
             </motion.div>
           ))}
         </div>
