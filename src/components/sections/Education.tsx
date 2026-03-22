@@ -52,7 +52,7 @@ export function Education() {
                       alt={edu.school}
                       width={36}
                       height={36}
-                      className="object-contain"
+                      className="h-auto w-auto object-contain"
                     />
                   ) : (
                     edu.logoFallback

@@ -46,7 +46,7 @@ export const profile = {
       id: 'ey-senior',
       title: 'Senior Consultant — Financial Risk Management',
       company: 'Ernst & Young (EY)',
-      companyUrl: 'https://www.ey.com/en_gl/consulting/financial-services-risk-management',
+      companyUrl: 'https://www.ey.com/en_cn/technical/hk-fsrm-insights',
       location: 'Hong Kong SAR',
       startDate: 'Sep 2025',
       endDate: null, 
