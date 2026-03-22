@@ -267,67 +267,6 @@ export const profile = {
       ],
     },
   ],
-
-  // ── Projects ──────────────────────────────────────────────
-  projects: [
-    {
-      id: 'credit-gnns',
-      title: 'Graph-Based Credit Risk with GNNs',
-      description:
-        'MSc thesis project — built a graph neural network that models borrower-counterparty relationships to improve credit default prediction by 12% over traditional logistic regression baselines.',
-      longDescription:
-        'Traditional credit models treat borrowers as isolated entities. This project constructs a heterogeneous knowledge graph of borrowers, transactions, and collateral assets, then applies a Graph Attention Network (GAT) to propagate risk signals through the network. Evaluated on a synthetic dataset mirroring HKMA stress-test scenarios.',
-      image: '/images/projects/gnns.png',
-      tags: ['Python', 'PyTorch Geometric', 'Graph Neural Networks', 'Credit Risk', 'Research'],
-      github: 'https://github.com/winstonbartlegod',
-      demo: '',
-      featured: true,
-      year: '2023',
-    },
-    {
-      id: 'finbert-sentiment',
-      title: 'FinBERT Sentiment for Earnings Calls',
-      description:
-        'Fine-tuned a FinBERT model on SEC earnings call transcripts to classify forward-looking statements as positive/neutral/negative — achieving 91% accuracy with calibrated uncertainty.',
-      longDescription:
-        'Earnings calls contain rich qualitative signals that quantitative models miss. This project scrapes and cleans EDGAR filings, segments forward-looking statements, and fine-tunes FinBERT using LoRA adapters for parameter-efficient training. A Platt-scaling layer provides calibrated confidence scores for downstream portfolio applications.',
-      image: '/images/projects/finbert.png',
-      tags: ['Python', 'HuggingFace', 'NLP', 'FinBERT', 'PEFT / LoRA', 'Sentiment Analysis'],
-      github: 'https://github.com/winstonbartlegod',
-      demo: '',
-      featured: true,
-      year: '2023',
-    },
-    {
-      id: 'nft-market-analysis',
-      title: 'NFT Market Microstructure Analysis',
-      description:
-        'Analysed trading patterns across OpenSea and LooksRare to identify wash-trading signals and price manipulation — informing regulatory guidance for Tencent WeChat Pay HK.',
-      longDescription:
-        'Using on-chain data from The Graph and Etherscan APIs, this project constructs transaction networks and applies anomaly-detection algorithms (Isolation Forest + network centrality measures) to flag suspicious trading clusters. The findings contributed to an internal report on VASP compliance in Hong Kong.',
-      image: '/images/projects/nft.png',
-      tags: ['Python', 'Web3.py', 'Network Analysis', 'Anomaly Detection', 'Blockchain', 'Regulatory'],
-      github: '',
-      demo: '',
-      featured: true,
-      year: '2023',
-    },
-    {
-      id: 'var-backtesting',
-      title: 'VaR Backtesting Suite',
-      description:
-        'An open-source R package for backtesting Value-at-Risk models using Kupiec, Christoffersen, and DQ tests with interactive Shiny dashboards.',
-      longDescription:
-        'This package implements the three standard VaR backtests (unconditional coverage, conditional coverage, and dynamic quantile) with clean tidy APIs, and includes a Shiny app for interactive exploration of exceedance patterns and traffic-light results.',
-      image: '/images/projects/var.png',
-      tags: ['R', 'Shiny', 'Risk Management', 'Backtesting', 'Open Source'],
-      github: 'https://github.com/winstonbartlegod',
-      demo: '',
-      featured: false,
-      year: '2022',
-    },
-  ],
-
   // ── Certifications ────────────────────────────────────────
   certifications: [
     {
@@ -358,4 +297,3 @@ export const profile = {
 export type Profile = typeof profile;
 export type Experience = (typeof profile.experience)[number];
 export type Education = (typeof profile.education)[number];
-export type Project = (typeof profile.projects)[number];

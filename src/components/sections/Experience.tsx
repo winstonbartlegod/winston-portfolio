@@ -66,7 +66,7 @@ export function Experience() {
                         alt={job.company}
                         width={28}
                         height={28}
-                        className="object-contain"
+                        className="h-auto w-auto object-contain"
                       />
                     ) : (
                       job.logoFallback
@@ -90,7 +90,7 @@ export function Experience() {
                               alt={job.company}
                               width={20}
                               height={20}
-                              className="object-contain"
+                              className="h-auto w-auto object-contain"
                             />
                           </div>
                         )}
