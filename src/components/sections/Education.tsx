@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, FileText, ExternalLink } from 'lucide-react';
 import { profile } from '@/data/profile';
 
 export function Education() {
@@ -83,6 +83,20 @@ export function Education() {
                   <span key={h} className="tag-pill-teal">{h}</span>
                 ))}
               </div>
+
+              {/* Thesis download link */}
+              {(edu as unknown as { thesisUrl?: string }).thesisUrl && (
+                <a
+                  href={(edu as unknown as { thesisUrl: string }).thesisUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors font-medium mt-1"
+                >
+                  <FileText size={12} />
+                  Download Bachelor Thesis
+                  <ExternalLink size={10} className="opacity-60" />
+                </a>
+              )}
             </motion.div>
           ))}
         </div>
@@ -100,24 +114,39 @@ export function Education() {
             Certifications
           </h3>
           <div className="grid sm:grid-cols-3 gap-3">
-            {profile.certifications.map((cert) => (
-              <a
-                key={cert.title}
-                href={cert.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card p-4 flex items-start gap-3 hover:border-white/15 transition-all group"
-              >
-                <span className="text-xl">{cert.icon}</span>
-                <div>
-                  <p className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
-                    {cert.title}
-                  </p>
-                  <p className="text-[10px] text-slate-600 mt-0.5">{cert.issuer}</p>
-                  <p className="text-[10px] text-gold-400/70 mt-0.5">{cert.date}</p>
-                </div>
-              </a>
-            ))}
+            {profile.certifications.map((cert) => {
+              const certImage = (cert as unknown as { image?: string }).image;
+              return (
+                <a
+                  key={cert.title}
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-card p-4 flex flex-col gap-3 hover:border-white/15 transition-all group"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl">{cert.icon}</span>
+                    <div>
+                      <p className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
+                        {cert.title}
+                      </p>
+                      <p className="text-[10px] text-slate-600 mt-0.5">{cert.issuer}</p>
+                      <p className="text-[10px] text-gold-400/70 mt-0.5">{cert.date}</p>
+                    </div>
+                  </div>
+                  {certImage && (
+                    <div className="relative w-full h-20 rounded-lg overflow-hidden border border-white/[0.06]">
+                      <Image
+                        src={certImage}
+                        alt={`${cert.title} certificate`}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
+                  )}
+                </a>
+              );
+            })}
           </div>
         </motion.div>
       </div>

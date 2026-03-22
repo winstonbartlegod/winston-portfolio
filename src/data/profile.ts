@@ -154,6 +154,7 @@ export const profile = {
       logo: '/images/logos/uva.svg',
       logoFallback: 'UA',
       color: '#BC0031',
+      thesisUrl: '/Bachelor_Thesis.pdf',
       description:
         'Rigorous quantitative training combining econometrics, causal inference, time-series analysis, and modern data science methods',
       highlights: ['Econometrics','Time-Series Analysis', 'Python', 'R', 'Mathematical Finance', 'Statistical Learning', 'Life Insurance'],
@@ -304,6 +305,14 @@ export const profile = {
 
   // ── Certifications ────────────────────────────────────────
   certifications: [
+    {
+      title: 'Certified Anti-Money Laundering Specialist (CAMS)',
+      issuer: 'ACAMS',
+      date: '2024',
+      url: 'https://www.acams.org/en/graduates/acams-graduate-list-cams-certified-graduates?search_api_fulltext=winston+chan+bartle&antibot_key=qgqxrpwmTsN2ol6XF7EC4jIc_GCPwBMNSXwBciVUuWY',
+      icon: '🛡️',
+      image: '/images/cams_certificate.jpg',
+    },
     {
       title: 'Neural Networks and Deep Learning',
       issuer: 'Coursera / DeepLearning.AI',

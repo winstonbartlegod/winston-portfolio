@@ -218,7 +218,7 @@ export function Hero() {
           >
             {/* Floating badges */}
             <FloatingBadge
-              text="EY Associate Consultant"
+              text="EY Senior Consultant"
               icon="💼"
               className="-top-4 -left-8 whitespace-nowrap"
             />
@@ -231,6 +231,11 @@ export function Hero() {
               text="AI · ML · Finance"
               icon="🤖"
               className="top-1/2 -right-16 whitespace-nowrap"
+            />
+            <FloatingBadge
+              text="BSc Econometrics — UvA"
+              icon="📊"
+              className="top-1/3 -left-16 whitespace-nowrap"
             />
 
             {/* Photo container */}
