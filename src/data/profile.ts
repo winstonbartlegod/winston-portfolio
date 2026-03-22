@@ -35,7 +35,7 @@ export const profile = {
   // ── Key Stats (shown in About section) ───────────────────
   stats: [
     { label: 'Years in FinTech', value: '3+' },
-    { label: 'ML Models Deployed', value: '10+' },
+   // { label: 'ML Models Deployed', value: '10+' },
     { label: 'Degrees Earned', value: '2' },
     { label: 'Cities Lived In', value: '4' },
   ],
@@ -66,7 +66,7 @@ export const profile = {
       id: 'ey',
       title: 'Consultant — Financial Risk Management',
       company: 'Ernst & Young (EY)',
-      companyUrl: 'https://www.ey.com/en_gl/consulting/financial-services-risk-management',
+      companyUrl: 'https://www.ey.com/en_cn/technical/hk-fsrm-insights',
       location: 'Hong Kong SAR',
       startDate: 'Sep 2023',
       endDate: 'Sep 2025', // null = present
@@ -139,8 +139,8 @@ export const profile = {
       logoFallback: 'HK',
       color: '#003366',
       description:
-        'Specialised in algorithmic trading systems, risk analytics, blockchain applications, and advanced machine learning for financial forecasting. Completed a thesis on graph-based credit risk assessment using GNNs.',
-      highlights: ['Graph Neural Networks', 'Algorithmic Trading', 'Blockchain', 'Risk Analytics'],
+        'Specialised in advanced machine learning and application to various domains such as financial forecasting. Covering all topics such as deep learning, graph neural networks, algorithmic trading, blockchain.',
+      highlights: ['Graph Neural Networks', 'Algorithmic Trading', 'Blockchain', 'Financial Modelling', 'AI'],
     },
     {
       id: 'uva',
@@ -155,8 +155,8 @@ export const profile = {
       logoFallback: 'UA',
       color: '#BC0031',
       description:
-        'Rigorous quantitative training combining classical econometrics, causal inference, time-series analysis, and modern data science methods. Minor in Mathematical Finance.',
-      highlights: ['Time-Series Analysis', 'Causal Inference', 'Mathematical Finance', 'Statistical Learning'],
+        'Rigorous quantitative training combining econometrics, causal inference, time-series analysis, and modern data science methods',
+      highlights: ['Econometrics','Time-Series Analysis', 'Python', 'R', 'Mathematical Finance', 'Statistical Learning', 'Life Insurance'],
     },
     {
       id: 'rug',
@@ -171,8 +171,24 @@ export const profile = {
       logoFallback: 'RG',
       color: '#E41E20',
       description:
-        'Foundational AI curriculum covering symbolic AI, search algorithms, machine learning, computer vision, and natural language processing. Built several award-winning projects in autonomous agents.',
-      highlights: ['NLP', 'Computer Vision', 'Autonomous Agents', 'Deep Learning'],
+        'Foundational AI curriculum covering symbolic AI, Logic, Algorithms and Data Structures, Programing in C',
+      highlights: ['C', 'Algorithm and Data Structures', 'Research', 'Logics'],
+    },
+    {
+      id: 'mckl',
+      degree: 'Cambridge CIE A-Levels',
+      school: 'Methodist College Kuala Lumpur',
+      shortName: 'MCKL',
+      location: 'Kuala Lumpur, Malaysia',
+      startYear: '2017',
+      endYear: '2018',
+      gpa: '',
+      logo: '/images/logos/mckl.svg',
+      logoFallback: 'MC',
+      color: '#bce41e',
+      description:
+        'Achieved straight A* in Further Mathematics, Mathematics, Physics, and Chemistry. Initially focused on mechanical engineering but developed a strong passion for data science and AI, leading to a pivot in academic focus.',
+      highlights: ['Further Mathematics', 'Mathematics', 'Physics', 'Chemistry'],
     },
   ],
 
@@ -301,13 +317,6 @@ export const profile = {
       date: 'Jan 2021',
       url: 'https://www.edx.org',
       icon: '⛓️',
-    },
-    {
-      title: 'Object-Oriented Programming in R',
-      issuer: 'DataCamp',
-      date: 'Dec 2020',
-      url: 'https://www.datacamp.com',
-      icon: '📊',
     },
   ],
 } as const;
