@@ -145,3 +145,15 @@ node_modules
 .next/static/webpack/app/page.dcab7b53cf56137d.hot-update.js
 .next/static/webpack/app/page.e804b7e04afc7f5b.hot-update.js
 .next/static/webpack/app/page.fbd2b08c238b55ec.hot-update.js
+.next/cache/webpack/client-development/0.pack.gz
+.next/cache/webpack/client-development/1.pack.gz
+.next/cache/webpack/client-development/3.pack.gz
+.next/cache/webpack/client-development/4.pack.gz
+.next/cache/webpack/client-development/index.pack.gz
+.next/cache/webpack/client-development/index.pack.gz.old
+.next/cache/webpack/server-development/3.pack.gz
+.next/cache/webpack/server-development/4.pack.gz
+.next/cache/webpack/server-development/5.pack.gz
+.next/cache/webpack/server-development/6.pack.gz
+.next/cache/webpack/server-development/index.pack.gz
+.next/cache/webpack/server-development/index.pack.gz.old

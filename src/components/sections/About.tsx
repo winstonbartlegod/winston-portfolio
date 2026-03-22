@@ -103,12 +103,12 @@ export function About() {
               <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/[0.06]">
                 <div className="flex items-center gap-3 text-sm text-slate-500">
                   <Zap size={14} className="text-gold-400 shrink-0" />
-                  Currently working on credit-risk AI at{' '}
+                  Currently working on IRRBB Modelling at{''}
                   <span className="text-slate-300 font-medium">Ernst & Young HK</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-slate-500">
                   <Coffee size={14} className="text-teal shrink-0" />
-                  When not coding: dim sum hunting in Kowloon & generating AI art
+                  When not coding: Just chilling
                 </div>
               </div>
             </motion.div>
