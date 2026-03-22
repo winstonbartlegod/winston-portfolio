@@ -49,7 +49,7 @@ export function Contact() {
           viewport={{ once: true }}
           className="section-label"
         >
-          07. Contact
+          06. Contact
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
@@ -72,10 +72,10 @@ export function Contact() {
           >
             <div>
               <p className="text-slate-400 leading-relaxed text-sm">
-                I'm always open to discussing interesting AI & finance problems, consulting engagements, research collaborations, or just connecting with fellow fintech enthusiasts.
+                I&rsquo;m always open to discussing interesting AI & finance problems, consulting engagements, research collaborations, or just connecting with fellow fintech enthusiasts.
               </p>
               <p className="text-slate-400 leading-relaxed text-sm mt-3">
-                Drop me a message and I'll get back to you within 48 hours.
+                Drop me a message and I&rsquo;ll get back to you within 48 hours.
               </p>
             </div>
 
@@ -122,7 +122,7 @@ export function Contact() {
                 <CheckCircle size={48} className="text-teal" />
                 <h3 className="text-white font-semibold text-lg">Message sent!</h3>
                 <p className="text-slate-400 text-sm">
-                  Thanks for reaching out. I'll reply within 48 hours.
+                  Thanks for reaching out. I&rsquo;ll reply within 48 hours.
                 </p>
                 <button
                   onClick={() => setStatus('idle')}

@@ -9,11 +9,19 @@ export const mdxComponents: MDXComponents = {
     <h1 className="text-3xl font-bold text-white mt-10 mb-4 tracking-tight">{children}</h1>
   ),
   h2: ({ children, id }) => (
-    <h2 id={id} className="text-2xl font-bold text-white mt-10 mb-3 tracking-tight scroll-mt-20">
-      <a href={`#${id}`} className="group flex items-center gap-2 no-underline hover:text-gold-400 transition-colors">
-        {children}
-        <span className="opacity-0 group-hover:opacity-40 text-gold-400 text-base">#</span>
-      </a>
+    <h2 id={id} className="group text-2xl font-bold text-white mt-10 mb-3 tracking-tight scroll-mt-20">
+      <span className="inline-flex items-center gap-2">
+        <span>{children}</span>
+        {id ? (
+          <a
+            href={`#${id}`}
+            aria-label={`Link to ${id}`}
+            className="opacity-0 hover:text-gold-400 group-hover:opacity-40 text-gold-400 text-base transition-colors"
+          >
+            #
+          </a>
+        ) : null}
+      </span>
     </h2>
   ),
   h3: ({ children, id }) => (
@@ -23,9 +31,7 @@ export const mdxComponents: MDXComponents = {
   ),
 
   // Paragraph
-  p: ({ children }) => (
-    <p className="text-slate-400 leading-relaxed my-4 text-[0.95rem]">{children}</p>
-  ),
+  p: ({ children }) => <div className="text-slate-400 leading-relaxed my-4 text-[0.95rem]">{children}</div>,
 
   // Links
   a: ({ href, children }) => {
@@ -40,6 +46,13 @@ export const mdxComponents: MDXComponents = {
         >
           {children}
           <ExternalLink size={11} className="inline opacity-60" />
+        </a>
+      );
+    }
+    if (href?.startsWith('#')) {
+      return (
+        <a href={href} className="text-gold-400 hover:text-gold-300 underline underline-offset-2 transition-colors">
+          {children}
         </a>
       );
     }

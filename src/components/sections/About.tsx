@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin, Coffee, Zap } from 'lucide-react';
+import Link from 'next/link';
+import { ExternalLink, FileText, MapPin, Coffee, Zap } from 'lucide-react';
 import { profile } from '@/data/profile';
 
 function StatCard({ value, label }: { value: string; label: string }) {
@@ -19,6 +19,9 @@ function StatCard({ value, label }: { value: string; label: string }) {
 export function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const thesis = profile.education.find(
+    (item): item is (typeof profile.education)[number] & { thesisUrl: string } => 'thesisUrl' in item
+  );
 
   return (
     <section id="about" className="section">
@@ -56,19 +59,43 @@ export function About() {
               className="lg:col-span-2"
             >
               <div className="relative">
-                {/* Photo */}
-                <div className="relative aspect-square rounded-2xl overflow-hidden glass-card gradient-border">
-                  <Image
-                    src={profile.avatar}
-                    alt={profile.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                  />
-                  {/* Fallback */}
-                  <div className="absolute inset-0 flex items-center justify-center text-7xl font-extrabold text-gold-400/30 bg-[#0D1117]">
-                    {profile.initials}
-                  </div>
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass-card gradient-border bg-[#0D1117]">
+                  {thesis ? (
+                    <>
+                      <iframe
+                        src={`${thesis.thesisUrl}#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+                        title="Bachelor thesis preview"
+                        className="absolute inset-0 h-full w-full"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/85 to-transparent p-5">
+                        <div className="flex items-start gap-3">
+                          <div className="mt-0.5 rounded-full border border-gold-400/30 bg-gold-400/10 p-2 text-gold-300">
+                            <FileText size={16} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-xs uppercase tracking-[0.24em] text-gold-300/80">
+                              Featured Work
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-slate-100">
+                              Bachelor Thesis Preview
+                            </p>
+                            <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                              First page from my UvA econometrics thesis.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#0D1117] px-8 text-center">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.24em] text-gold-300/80">
+                          Featured Work
+                        </p>
+                        <p className="mt-4 text-3xl font-bold text-slate-100">{profile.initials}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Location chip */}
@@ -77,6 +104,18 @@ export function About() {
                   {profile.location}
                 </div>
               </div>
+
+              {thesis ? (
+                <Link
+                  href={thesis.thesisUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:border-gold-400/40 hover:text-white"
+                >
+                  Open full bachelor thesis
+                  <ExternalLink size={14} />
+                </Link>
+              ) : null}
 
               {/* Stats grid */}
               <div className="grid grid-cols-2 gap-3 mt-8">

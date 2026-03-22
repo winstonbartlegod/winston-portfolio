@@ -43,7 +43,7 @@ export const profile = {
   // ── Experience ────────────────────────────────────────────
   experience: [
     {
-      id: 'ey',
+      id: 'ey-senior',
       title: 'Senior Consultant — Financial Risk Management',
       company: 'Ernst & Young (EY)',
       companyUrl: 'https://www.ey.com/en_gl/consulting/financial-services-risk-management',
@@ -63,7 +63,7 @@ export const profile = {
       tags: ['AWS','Machine Learning', 'Risk Modelling', 'Model Validation', 'Model Monitoring' ,'Python', 'Alteryx', 'AI'],
     },
     {
-      id: 'ey',
+      id: 'ey-consultant',
       title: 'Consultant — Financial Risk Management',
       company: 'Ernst & Young (EY)',
       companyUrl: 'https://www.ey.com/en_cn/technical/hk-fsrm-insights',

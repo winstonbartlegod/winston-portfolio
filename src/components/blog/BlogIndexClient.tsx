@@ -36,11 +36,11 @@ export function BlogIndexClient({ posts }: { posts: PostMeta[] }) {
             <div className="p-2 rounded-lg bg-gold-400/10">
               <Rss size={18} className="text-gold-400" />
             </div>
-            <p className="section-label m-0">Writing</p>
+            <p className="section-label m-0">Project Writing</p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Project Writing</h1>
           <p className="text-slate-400 mt-3 text-base max-w-xl">
-            Thoughts on AI, machine learning, quantitative finance, and the future of fintech.
+            Posts that can mix write-ups, project notes, code snippets, and GitHub links in one place.
           </p>
         </motion.div>
 
@@ -86,7 +86,7 @@ export function BlogIndexClient({ posts }: { posts: PostMeta[] }) {
         )}
 
         <p className="text-xs text-slate-600 mb-6">
-          {filtered.length} article{filtered.length !== 1 ? 's' : ''}
+          {filtered.length} post{filtered.length !== 1 ? 's' : ''}
         </p>
 
         {/* Grid */}
@@ -105,7 +105,7 @@ export function BlogIndexClient({ posts }: { posts: PostMeta[] }) {
           </div>
         ) : (
           <div className="text-center py-20 text-slate-600">
-            <p className="text-lg">No articles found</p>
+            <p className="text-lg">No posts found</p>
             <button
               onClick={() => { setQuery(''); setActiveTag(''); }}
               className="mt-3 text-sm text-gold-400 hover:text-gold-300 transition-colors"

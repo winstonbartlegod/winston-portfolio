@@ -11,7 +11,7 @@ export default function NotFound() {
         </div>
         <h1 className="text-2xl font-bold text-white mb-3">Page Not Found</h1>
         <p className="text-slate-500 mb-8 max-w-sm mx-auto text-sm">
-          This page doesn't exist or has been moved. Let's get you back on track.
+          This page doesn&rsquo;t exist or has been moved. Let&rsquo;s get you back on track.
         </p>
         <Link href="/" className="btn-primary">
           <ArrowLeft size={14} /> Back Home

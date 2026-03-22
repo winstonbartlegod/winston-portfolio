@@ -24,7 +24,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
               viewport={{ once: true }}
               className="section-label"
             >
-              06. Writing
+              05. Project Writing
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
@@ -33,7 +33,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
               transition={{ delay: 0.05 }}
               className="section-title mb-0"
             >
-              Latest Posts
+              Project Writing
             </motion.h2>
           </div>
           <motion.div
@@ -45,7 +45,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
               href="/blog"
               className="flex items-center gap-1.5 text-sm text-gold-400 hover:text-gold-300 transition-colors font-medium"
             >
-              All Posts <ArrowRight size={14} />
+              All Writing <ArrowRight size={14} />
             </Link>
           </motion.div>
         </div>

@@ -175,8 +175,8 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <motion.div {...fadeUp(0.5)} className="flex flex-wrap gap-3 mt-2">
-              <Link href="/#projects" className="btn-primary">
-                View Work
+              <Link href="/#experience" className="btn-primary">
+                View Work History
                 <ArrowDown size={15} className="rotate-[-90deg]" />
               </Link>
               <Link href="/#contact" className="btn-secondary">

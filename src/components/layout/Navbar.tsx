@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon, Download } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/components/providers/ThemeProvider';
 import { profile } from '@/data/profile';
 import { cn } from '@/lib/utils';
 
@@ -12,18 +12,14 @@ const navLinks = [
   { label: 'About',      href: '/#about' },
   { label: 'Experience', href: '/#experience' },
   { label: 'Skills',     href: '/#skills' },
-  { label: 'Projects',   href: '/#projects' },
-  { label: 'Blog',       href: '/blog' },
+  { label: 'Writing',    href: '/#blog' },
   { label: 'Contact',    href: '/#contact' },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
+  const { resolvedTheme, setTheme } = useTheme();
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60);
@@ -33,9 +29,6 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
-
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false); }, []);
 
   return (
     <>
@@ -83,15 +76,13 @@ export function Navbar() {
           {/* Right actions */}
           <div className="flex items-center gap-2">
             {/* Theme toggle */}
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-              </button>
-            )}
+            <button
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
 
             {/* CV Download */}
             <a

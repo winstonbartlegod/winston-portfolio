@@ -4,8 +4,8 @@ import { getAllPosts } from '@/lib/mdx';
 import { BlogIndexClient } from '@/components/blog/BlogIndexClient';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Writing on AI, machine learning, quantitative finance, and fintech.',
+  title: 'Project Writing',
+  description: 'Project notes, technical writing, and posts on AI, machine learning, quantitative finance, and fintech.',
 };
 
 export default function BlogPage() {

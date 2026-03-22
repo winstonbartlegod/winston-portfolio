@@ -1,24 +1,9 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Fira_Code } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { profile } from '@/data/profile';
-
-const jakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
-});
-
-const firaCode = Fira_Code({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: ['300', '400', '500'],
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://winstonbartle.com';
 
@@ -83,18 +68,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${jakartaSans.variable} ${firaCode.variable}`}
-    >
-      <body className="bg-[#06090F] text-slate-200 antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>

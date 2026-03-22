@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/mdx';
 import { mdxComponents } from '@/components/blog/MDXComponents';
 import { formatDate } from '@/lib/utils';
+
+type MdxRemoteOptions = NonNullable<Parameters<typeof MDXRemote>[0]['options']>;
 
 // ── Static params (required for static export) ──────────────────
 export async function generateStaticParams() {
@@ -41,14 +42,12 @@ export async function generateMetadata({
 }
 
 // ── MDX options ─────────────────────────────────────────────────
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mdxOptions: any = {
+const mdxOptions: MdxRemoteOptions = {
   mdxOptions: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-      [rehypePrettyCode, { theme: 'github-dark-dimmed', keepBackground: true }],
+      [rehypePrettyCode, { theme: 'github-dark-dimmed', keepBackground: true }] as const,
     ],
   },
 };
