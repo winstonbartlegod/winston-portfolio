@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="69.32" width="68.67">
-  <path d="M11.09 61.4h17.37v7.92H.67V34.9h19.7l4.61 7.92H11.1v5.68h12.56v7.22H11.1zm35.86-26.5l-5.9 11.23-5.88-11.23H23.65l12.13 20.82v13.6h10.4v-13.6L58.31 34.9z" fill="#161d23" fill-rule="evenodd"/>
-  <path fill="#ffe600" fill-rule="evenodd" d="M68.67 12.81V0L0 24.83z"/>
-</svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 -18 217.599 217.599" xmlns="http://www.w3.org/2000/svg">
+<path fill="#ffe400" d="M0 79.4L217.599 0v41z"/>
+<g fill="#575756">
+<path d="M24.9 150.6h28.5v-16.5H24.9v-13h31.5L46 103H1.4v78.6h62.8v-18.1H24.9zM106.1 103l-13.3 25.7L79.4 103h-26l27.4 47.6v31h23.5v-31l27.5-47.6z"/>
+</g>
+</svg>
