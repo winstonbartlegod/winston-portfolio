@@ -60,7 +60,7 @@ export function Experience() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg border border-white/10 z-10 relative transition-all duration-300 group-hover:scale-110 overflow-hidden"
                     style={{ background: `${job.color}20`, color: job.color, borderColor: `${job.color}30` }}
                   >
-                    {job.logo ? (
+                    {(job.logo as string | undefined) ? (
                       <Image
                         src={job.logo}
                         alt={job.company}
