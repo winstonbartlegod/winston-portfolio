@@ -164,7 +164,7 @@ export const profile = {
       school: 'University of Groningen',
       shortName: 'RUG',
       location: 'Groningen, Netherlands',
-      startYear: '2016',
+      startYear: '2018',
       endYear: '2019',
       gpa: '',
       logo: '/images/logos/rug.svg',
