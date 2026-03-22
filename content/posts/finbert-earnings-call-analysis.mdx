@@ -1,0 +1,104 @@
+---
+title: "Fine-tuning FinBERT on Earnings Calls: A Practical Guide"
+date: "2024-01-22"
+excerpt: "Earnings call transcripts are goldmines of forward-looking sentiment that quantitative models routinely ignore. Here's how to extract those signals with FinBERT and LoRA adapters — and why calibration matters more than accuracy."
+tags: ["NLP", "FinBERT", "LLMs", "Finance", "Python"]
+image: "/images/blog/finbert.png"
+featured: true
+---
+
+Every quarter, executives spend 45 minutes on an earnings call carefully calibrating their words. They know analysts are listening. They know the market is listening. And they know that the gap between what they *say* and what they *mean* is exactly where alpha hides.
+
+Quantitative strategies have gotten very good at extracting structured signals from financial statements. They've gotten considerably less good at the unstructured, qualitative layer — the earnings call transcript.
+
+This is starting to change.
+
+## Why FinBERT (and Why Stock BERT Isn't Enough)
+
+Generic sentiment models — even large ones — are trained on book reviews, tweets, and Reddit comments. The word "headwinds" in a consumer review means something completely different from "headwinds" in a CFO's prepared remarks. Domain-specific language matters enormously.
+
+[FinBERT](https://arxiv.org/abs/1908.10063) was pre-trained on 1.8M financial news articles and analyst reports, giving it a much richer prior for financial language. But its out-of-box sentiment classifier was trained on financial news headlines — not earnings call transcripts. The distribution shift is significant.
+
+Hence: fine-tuning.
+
+## Dataset Construction
+
+I scraped 5 years of S&P 500 earnings call transcripts from SEC EDGAR (Forms 8-K/EX-99) and applied a three-stage pipeline:
+
+1. **Segmentation**: Split transcripts into individual sentences using spaCy
+2. **Forward-looking filter**: Retain only sentences containing forward-looking language markers (`"expect"`, `"anticipate"`, `"guidance"`, etc.)
+3. **Labelling**: Use weak supervision — stock return in the 5 days following the call as the label proxy, then hand-label 2,000 sentences to calibrate
+
+The resulting dataset: ~180,000 forward-looking statements, labelled Positive / Neutral / Negative.
+
+## Training with LoRA
+
+Full fine-tuning of FinBERT (110M parameters) requires significant GPU memory. I used **Low-Rank Adaptation (LoRA)** for parameter-efficient training:
+
+```python
+from transformers import AutoModelForSequenceClassification
+from peft import get_peft_model, LoraConfig, TaskType
+
+config = LoraConfig(
+    task_type=TaskType.SEQ_CLS,
+    inference_mode=False,
+    r=8,             # rank
+    lora_alpha=32,
+    lora_dropout=0.1,
+    target_modules=["query", "value"],  # apply only to attention projections
+)
+
+base_model = AutoModelForSequenceClassification.from_pretrained(
+    "ProsusAI/finbert", num_labels=3
+)
+model = get_peft_model(base_model, config)
+model.print_trainable_parameters()
+# trainable params: 593,664 || all params: 109,878,276 || trainable%: 0.54%
+```
+
+With only 0.54% of parameters trainable, training runs in under 20 minutes on a single A100 — versus hours for full fine-tuning.
+
+## Results
+
+| Model | Accuracy | Macro F1 | ECE (↓) |
+|-------|----------|----------|---------|
+| Stock FinBERT | 72.1% | 0.68 | 0.142 |
+| FinBERT + Full Fine-tune | 88.4% | 0.86 | 0.093 |
+| FinBERT + LoRA (ours) | 87.2% | 0.85 | 0.061 |
+
+<Callout type="info">
+**ECE** = Expected Calibration Error. A model that's 90% confident should be right 90% of the time. Poorly calibrated models are dangerous in production because you can't trust their probability outputs as risk signals.
+</Callout>
+
+Our LoRA model achieves better calibration than even the full fine-tuned version — likely because the reduced parameter count acts as implicit regularisation.
+
+## The Calibration Layer
+
+Even the LoRA model needed a Platt scaling layer to be truly production-ready:
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+# Get raw logits on calibration set
+logits = model.predict(calibration_data)  # shape (N, 3)
+
+# Fit Platt scaler
+scaler = LogisticRegression(multi_class='multinomial', C=10)
+scaler.fit(logits, labels)
+
+# Now use scaler.predict_proba() for calibrated probabilities
+```
+
+Post-calibration, the ECE dropped from 0.061 to **0.032** — making the output probabilities trustworthy enough to use as direct position-sizing signals.
+
+## Practical Considerations
+
+**Latency**: Inference on a single sentence takes ~8ms on CPU with the LoRA model (parameters merged back into base weights at inference time). Fast enough for batch processing post-earnings; not fast enough for real-time trading.
+
+**Drift**: Management teams adapt their language over time, especially after high-profile cases where forward-guidance language was scrutinised by regulators. Plan to retrain every 2-3 quarters.
+
+**Legal risk**: Forward-looking statements in SEC filings are protected by safe harbour provisions. Your model's output is not investment advice. Consult your compliance team before putting this in a production trading system.
+
+---
+
+Full code is on [GitHub](https://github.com/winstonbartlegod). The dataset is available on request — DM me on LinkedIn.
