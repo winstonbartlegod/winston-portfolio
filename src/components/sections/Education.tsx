@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { profile } from '@/data/profile';
@@ -39,13 +40,23 @@ export function Education() {
               transition={{ duration: 0.55, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
               className="glass-card p-6 flex flex-col gap-4 hover:border-white/15 group transition-all duration-300"
             >
-              {/* Logo placeholder */}
+              {/* Logo */}
               <div className="flex items-center justify-between">
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-transform duration-300 group-hover:scale-105"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-transform duration-300 group-hover:scale-105 overflow-hidden"
                   style={{ background: `${edu.color}18`, color: edu.color, border: `1px solid ${edu.color}25` }}
                 >
-                  {edu.logoFallback}
+                  {(edu.logo as string | undefined) ? (
+                    <Image
+                      src={edu.logo}
+                      alt={edu.school}
+                      width={36}
+                      height={36}
+                      className="object-contain"
+                    />
+                  ) : (
+                    edu.logoFallback
+                  )}
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
                   <Calendar size={11} />
