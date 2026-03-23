@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Project notes, technical writing, and posts on AI, machine learning, quantitative finance, and fintech.',
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPosts();
   return <BlogIndexClient posts={posts} />;
 }

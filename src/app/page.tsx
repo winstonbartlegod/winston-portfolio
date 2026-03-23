@@ -8,8 +8,8 @@ import { Documents }   from '@/components/sections/Documents';
 import { Contact }     from '@/components/sections/Contact';
 import { getAllPosts }  from '@/lib/mdx';
 
-export default function HomePage() {
-  const posts = getAllPosts().slice(0, 3);
+export default async function HomePage() {
+  const posts = (await getAllPosts()).slice(0, 3);
 
   return (
     <>

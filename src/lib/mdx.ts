@@ -1,9 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-
-const postsDirectory = path.join(process.cwd(), 'content/posts');
 
 export interface PostFrontmatter {
   title: string;
@@ -26,58 +22,73 @@ export interface PostMeta extends PostFrontmatter {
   readingTime: string;
 }
 
-function ensurePostsDir() {
-  if (!fs.existsSync(postsDirectory)) {
-    fs.mkdirSync(postsDirectory, { recursive: true });
+async function getPostsDirectory() {
+  const path = await import('node:path');
+  return path.join(process.cwd(), 'content/posts');
+}
+
+async function getPostFileNames() {
+  const fs = await import('node:fs/promises');
+
+  try {
+    const postsDirectory = await getPostsDirectory();
+    const fileNames = await fs.readdir(postsDirectory);
+    return fileNames.filter((fileName) => fileName.endsWith('.mdx'));
+  } catch {
+    return [];
   }
 }
 
-export function getAllPosts(): PostMeta[] {
-  ensurePostsDir();
+export async function getAllPosts(): Promise<PostMeta[]> {
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const postsDirectory = await getPostsDirectory();
+  const fileNames = await getPostFileNames();
 
-  const fileNames = fs.readdirSync(postsDirectory).filter((f) => f.endsWith('.mdx'));
+  const posts = await Promise.all(
+    fileNames.map(async (fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '');
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = await fs.readFile(fullPath, 'utf8');
+      const { data, content } = matter(fileContents);
+      const rt = readingTime(content);
 
-  const posts = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-    const rt = readingTime(content);
-
-    return {
-      slug,
-      ...(data as PostFrontmatter),
-      readingTime: rt.text,
-    } as PostMeta;
-  });
+      return {
+        slug,
+        ...(data as PostFrontmatter),
+        readingTime: rt.text,
+      } as PostMeta;
+    })
+  );
 
   return posts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
-export function getPostBySlug(slug: string): Post | null {
-  ensurePostsDir();
-
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const postsDirectory = await getPostsDirectory();
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-  if (!fs.existsSync(fullPath)) return null;
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-  const rt = readingTime(content);
+  try {
+    const fileContents = await fs.readFile(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    const rt = readingTime(content);
 
-  return {
-    slug,
-    ...(data as PostFrontmatter),
-    content,
-    readingTime: rt.text,
-  } as Post;
+    return {
+      slug,
+      ...(data as PostFrontmatter),
+      content,
+      readingTime: rt.text,
+    } as Post;
+  } catch {
+    return null;
+  }
 }
 
-export function getAllPostSlugs(): string[] {
-  ensurePostsDir();
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
+export async function getAllPostSlugs(): Promise<string[]> {
+  const fileNames = await getPostFileNames();
+  return fileNames.map((fileName) => fileName.replace(/\.mdx$/, ''));
 }

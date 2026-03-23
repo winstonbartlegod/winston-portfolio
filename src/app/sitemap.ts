@@ -5,8 +5,8 @@ export const dynamic = 'force-static';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://winstonbartle.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 },

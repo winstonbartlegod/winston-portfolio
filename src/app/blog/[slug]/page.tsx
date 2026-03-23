@@ -14,7 +14,7 @@ type MdxRemoteOptions = NonNullable<Parameters<typeof MDXRemote>[0]['options']>;
 
 // ── Static params (required for static export) ──────────────────
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
+  const slugs = await getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -25,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: 'Post Not Found' };
 
   return {
@@ -59,13 +59,15 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const allSlugs = getAllPostSlugs();
+  const allSlugs = await getAllPostSlugs();
   const currentIndex = allSlugs.indexOf(slug);
   const prevSlug = currentIndex < allSlugs.length - 1 ? allSlugs[currentIndex + 1] : null;
   const nextSlug = currentIndex > 0 ? allSlugs[currentIndex - 1] : null;
+  const prevPost = prevSlug ? await getPostBySlug(prevSlug) : null;
+  const nextPost = nextSlug ? await getPostBySlug(nextSlug) : null;
 
   return (
     <div className="min-h-screen pt-24 pb-20 px-4">
@@ -141,36 +143,28 @@ export default async function PostPage({
 
         {/* Prev / Next */}
         <div className="grid sm:grid-cols-2 gap-4">
-          {prevSlug && (() => {
-            const prev = getPostBySlug(prevSlug);
-            if (!prev) return null;
-            return (
-              <Link
-                href={`/blog/${prevSlug}`}
-                className="glass-card p-4 hover:border-white/15 transition-all group"
-              >
-                <p className="text-[10px] text-slate-600 uppercase tracking-wider mb-1.5">← Previous</p>
-                <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
-                  {prev.title}
-                </p>
-              </Link>
-            );
-          })()}
-          {nextSlug && (() => {
-            const next = getPostBySlug(nextSlug);
-            if (!next) return null;
-            return (
-              <Link
-                href={`/blog/${nextSlug}`}
-                className="glass-card p-4 hover:border-white/15 transition-all group sm:text-right"
-              >
-                <p className="text-[10px] text-slate-600 uppercase tracking-wider mb-1.5">Next →</p>
-                <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
-                  {next.title}
-                </p>
-              </Link>
-            );
-          })()}
+          {prevSlug && prevPost && (
+            <Link
+              href={`/blog/${prevSlug}`}
+              className="glass-card p-4 hover:border-white/15 transition-all group"
+            >
+              <p className="text-[10px] text-slate-600 uppercase tracking-wider mb-1.5">← Previous</p>
+              <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
+                {prevPost.title}
+              </p>
+            </Link>
+          )}
+          {nextSlug && nextPost && (
+            <Link
+              href={`/blog/${nextSlug}`}
+              className="glass-card p-4 hover:border-white/15 transition-all group sm:text-right"
+            >
+              <p className="text-[10px] text-slate-600 uppercase tracking-wider mb-1.5">Next →</p>
+              <p className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors leading-snug">
+                {nextPost.title}
+              </p>
+            </Link>
+          )}
         </div>
       </div>
     </div>
