@@ -1,8 +1,15 @@
 import { defineCloudflareConfig } from '@opennextjs/cloudflare';
 
-export default defineCloudflareConfig({
+const config = defineCloudflareConfig({
   incrementalCache: 'dummy',
   tagCache: 'dummy',
   queue: 'dummy',
   cachePurge: 'dummy',
 });
+
+const openNextConfig = {
+  ...config,
+  buildCommand: 'npm run build:next',
+};
+
+export default openNextConfig;
