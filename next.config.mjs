@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export for Netlify — works with all blog MDX content
-  output: 'export',
+  // Required for OpenNext / Cloudflare Workers bundling
+  output: 'standalone',
 
   // Required so next-mdx-remote is compiled correctly in dev
   transpilePackages: ['next-mdx-remote'],

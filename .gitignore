@@ -1,4 +1,6 @@
 node_modules
+.DS_Store
+**/.DS_Store
 out/
 /next
 .next/
@@ -162,3 +164,7 @@ out/
 .next/cache/webpack/server-development/6.pack.gz
 .next/cache/webpack/server-development/index.pack.gz
 .next/cache/webpack/server-development/index.pack.gz.old
+.open-next/
+.wrangler/
+.dev.vars
+.dev.vars.*
